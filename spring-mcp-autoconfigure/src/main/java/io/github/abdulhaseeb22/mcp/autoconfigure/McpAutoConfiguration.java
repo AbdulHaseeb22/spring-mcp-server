@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Role;
 
 /**
  * Spring Boot auto-configuration for the MCP server.
@@ -33,6 +35,7 @@ public class McpAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
     McpToolRegistry mcpToolRegistry() {
         return new McpToolRegistry();
     }
@@ -44,6 +47,7 @@ public class McpAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
     static McpToolScanner mcpToolScanner(McpToolRegistry registry) {
         return new McpToolScanner(registry);
     }

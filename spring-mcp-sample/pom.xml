@@ -39,6 +39,20 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Pin to the new main class; avoids ambiguity with the
+                         legacy com.example.mcp.sample.SampleApplication -->
+                    <mainClass>io.github.abdulhaseeb22.mcp.sample.SampleApplication</mainClass>
+                </configuration>
+            </plugin>
+            <!-- Emit parameter names into bytecode so McpToolScanner can use
+                 them as fallback when @McpParam(name=…) is absent -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <parameters>true</parameters>
+                </configuration>
             </plugin>
         </plugins>
     </build>
